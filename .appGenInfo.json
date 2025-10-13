@@ -1,0 +1,29 @@
+{
+  "generationParameters": {
+    "generationDate": "Mon Oct 13 2025 20:22:38 GMT+0530 (India Standard Time)",
+    "generatorPlatform": "Visual Studio Code",
+    "serviceType": "SAP System (ABAP On-Premise)",
+    "metadataFilename": "",
+    "serviceUrl": "http://sapsdvapp.aws.londonhydro.cloud:8000/sap/opu/odata/sap/ZUI_SERVICEORDER",
+    "appName": "zlh_service_order_mso",
+    "appTitle": "Service Order - MSO",
+    "appDescription": "Service Order - MSO",
+    "appNamespace": "com.sap.lh.mr",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.120.0",
+    "enableCodeAssist": false,
+    "enableEslint": false,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.18.6",
+    "template": "List Report Page V2",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [
+      {
+        "type": "Main Entity",
+        "value": "ServiceOrder"
+      }
+    ],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```"
+  }
+}
