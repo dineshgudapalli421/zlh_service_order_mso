@@ -68,15 +68,17 @@
                 <Property Name="DataController9" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
                 <Property Name="DataController10" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
             </EntityType>
-            <EntityType Name="I_ServiceDocumentItemVHType" sap:label="Value help for Sevice Document Item" sap:value-list="true" sap:content-version="1">
+            <EntityType Name="I_ProfitCenterStdVHType" sap:label="Profit Center" sap:value-list="true" sap:content-version="1">
                 <Key>
-                    <PropertyRef Name="ServiceDocumentItem"/>
-                    <PropertyRef Name="ServiceDocumentType"/>
-                    <PropertyRef Name="ServiceDocument"/>
+                    <PropertyRef Name="ControllingArea"/>
+                    <PropertyRef Name="ProfitCenter"/>
+                    <PropertyRef Name="ValidityEndDate"/>
                 </Key>
-                <Property Name="ServiceDocumentItem" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative" sap:text="ServiceDocumentItem" sap:label="Service Doc. Item" sap:quickinfo="Service Document Item ID"/>
-                <Property Name="ServiceDocumentType" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Service Doc. Type" sap:quickinfo="Service Document Type"/>
-                <Property Name="ServiceDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Service Document" sap:quickinfo="Service Document ID"/>
+                <Property Name="ControllingArea" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Controlling Area"/>
+                <Property Name="ProfitCenter" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="ProfitCenter_Text" sap:label="Profit Center"/>
+                <Property Name="ProfitCenter_Text" Type="Edm.String" MaxLength="20" sap:label="Profit Center Name" sap:quickinfo="Description of Profit Center" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ValidityEndDate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date" sap:label="Valid To" sap:quickinfo="Valid To Date"/>
+                <Property Name="ValidityStartDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Valid From" sap:quickinfo="Valid-From Date"/>
             </EntityType>
             <EntityType Name="I_ServiceDocumentTypeStdVHType" sap:label="Service Document Type Value Help" sap:value-list="true" sap:content-version="1">
                 <Key>
@@ -94,7 +96,7 @@
                     <PropertyRef Name="ServiceDocumentItem"/>
                 </Key>
                 <Property Name="ServiceObjectType" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Service Object" sap:quickinfo="Business Trans. Cat."/>
-                <Property Name="ServiceOrder" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Service Document" sap:quickinfo="Transaction ID" sap:value-list="standard"/>
+                <Property Name="ServiceOrder" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Transaction ID"/>
                 <Property Name="ServiceDocumentItem" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative" sap:label="Item Number in Doc." sap:quickinfo="Shortened Item Number in Document"/>
                 <Property Name="ServiceDocumentItemDescription" Type="Edm.String" MaxLength="40" sap:label="Product Description"/>
                 <Property Name="ServiceDocItemCategory" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:text="ServiceDocItemCategoryName" sap:label="Item Category"/>
@@ -122,10 +124,12 @@
                 <Property Name="SalesOrganizationOrgUnitID" Type="Edm.String" MaxLength="14" sap:display-format="UpperCase" sap:label="Sales Organization ID"/>
                 <Property Name="Product" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Product" sap:quickinfo="Product Number"/>
                 <Property Name="ProfitCenter" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Profit Center"/>
-                <Property Name="InternalOrder" Type="Edm.String" MaxLength="70" sap:label="Internal Order" sap:quickinfo="Object key"/>
-                <Property Name="MaintenanceOrder" Type="Edm.String" MaxLength="70" sap:label="Maintenance Order" sap:quickinfo="Object key"/>
+                <Property Name="InternalOrder" Type="Edm.String" MaxLength="70" sap:label="Key" sap:quickinfo="Object key"/>
+                <Property Name="MaintenanceOrder" Type="Edm.String" MaxLength="70" sap:label="Key" sap:quickinfo="Object key"/>
+                <Property Name="PMOrderInternalOrder" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Settlement Order" sap:quickinfo="Settlement order"/>
+                <Property Name="PMOrderProfitCenter" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Profit Center" sap:value-list="standard"/>
                 <Property Name="BillingRequest" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Billing Request" sap:quickinfo="Billing Document"/>
-                <Property Name="BillingDocument" Type="Edm.String" MaxLength="70" sap:label="Billing Document" sap:quickinfo="Object key"/>
+                <Property Name="BillingDocument" Type="Edm.String" MaxLength="70" sap:label="Key" sap:quickinfo="Object key"/>
                 <Property Name="Equipment" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Meter Number" sap:quickinfo="Equipment Number"/>
                 <Property Name="DeviceLocation" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Device Location" sap:quickinfo="30 Characters"/>
                 <Property Name="QuotationIsAccepted" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Quotation Accepted" sap:quickinfo="Acceptance Status"/>
@@ -135,8 +139,8 @@
                 <Property Name="ServiceDocBillingStatusName" Type="Edm.String" MaxLength="60" sap:label="Short Description" sap:quickinfo="Short Text for Fixed Values"/>
                 <Property Name="ServiceDocItemCreatedByUser" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By User" sap:quickinfo="User that Created the Transaction"/>
                 <Property Name="ServiceDocItemChangedByUser" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By User" sap:quickinfo="Transaction Last Changed By"/>
-                <Property Name="ServiceDocumentItemNetAmount" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Net AMount" sap:quickinfo="Net Value"/>
-                <Property Name="ServiceDocumentItemTaxAmount" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Tax Amount" sap:quickinfo="Tax amount in document currency"/>
+                <Property Name="ServiceDocumentItemNetAmount" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Net Value"/>
+                <Property Name="ServiceDocumentItemTaxAmount" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true" sap:label="Tax amount" sap:quickinfo="Tax amount in document currency"/>
                 <Property Name="TransactionCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:semantics="currency-code"/>
                 <Property Name="CalendarQuarter" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Calendar Quarter"/>
                 <Property Name="CalendarQuarterName" Type="Edm.String" MaxLength="60" sap:label="Calendar Quarter Name"/>
@@ -391,7 +395,7 @@
                 <EntitySet Name="SAP__PDFFooterSet" EntityType="cds_zwm_serviceorder.SAP__PDFFooter" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__ValueHelpSet" EntityType="cds_zwm_serviceorder.SAP__ValueHelp" sap:content-version="1"/>
                 <EntitySet Name="I_BusinessPartnerVH" EntityType="cds_zwm_serviceorder.I_BusinessPartnerVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="I_ServiceDocumentItemVH" EntityType="cds_zwm_serviceorder.I_ServiceDocumentItemVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_ProfitCenterStdVH" EntityType="cds_zwm_serviceorder.I_ProfitCenterStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="I_ServiceDocumentTypeStdVH" EntityType="cds_zwm_serviceorder.I_ServiceDocumentTypeStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="ServiceOrder" EntityType="cds_zwm_serviceorder.ServiceOrderType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="SAP__Currencies" EntityType="cds_zwm_serviceorder.SAP__Currency" sap:content-version="1"/>
@@ -431,29 +435,6 @@
                 </AssociationSet>
             </EntityContainer>
             <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
-            <Annotations Target="cds_zwm_serviceorder.ServiceOrderType/ServiceOrder" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.ValueList">
-                    <Record>
-                        <PropertyValue Property="Label" String="Transaction ID"/>
-                        <PropertyValue Property="CollectionPath" String="I_ServiceDocumentItemVH"/>
-                        <PropertyValue Property="SearchSupported" Bool="true"/>
-                        <PropertyValue Property="Parameters">
-                            <Collection>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="ServiceDocumentItem"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterInOut">
-                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ServiceOrder"/>
-                                    <PropertyValue Property="ValueListProperty" String="ServiceDocument"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="ServiceDocumentType"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-            </Annotations>
             <Annotations Target="cds_zwm_serviceorder.ServiceOrderType/ServiceDocumentType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
                     <Record>
@@ -533,9 +514,48 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
+                <Annotation Term="Common.SemanticObject" String="ZLH_ServiceOrder"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_serviceorder.ServiceOrderType/PMOrderProfitCenter" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Profit Center"/>
+                        <PropertyValue Property="CollectionPath" String="I_ProfitCenterStdVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="PMOrderProfitCenter"/>
+                                    <PropertyValue Property="ValueListProperty" String="ProfitCenter"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ControllingArea"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ProfitCenter_Text"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ValidityEndDate"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ValidityStartDate"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
             </Annotations>
             <Annotations Target="cds_zwm_serviceorder.cds_zwm_serviceorder_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_serviceorder.ServiceOrderType/ServiceOrder" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.SemanticObject" String="ServiceOrder"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_serviceorder.ServiceOrderType/ServiceDocumentItem" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.SemanticObject" String="Service"/>
+            </Annotations>
+            <Annotations Target="cds_zwm_serviceorder.ServiceOrderType/BillingRequest" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.SemanticObject" String="ZLH_ServiceOrder"/>
             </Annotations>
             <Annotations Target="cds_zwm_serviceorder.cds_zwm_serviceorder_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Org.OData.Capabilities.V1.BatchSupport">

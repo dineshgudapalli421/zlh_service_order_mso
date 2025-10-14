@@ -117,61 +117,35 @@
                     </Collection>
                 </Annotation>
             </Annotations>
-            <Annotations Target="cds_zwm_serviceorder.I_ServiceDocumentItemVHType">
+            <Annotations Target="cds_zwm_serviceorder.I_ProfitCenterStdVHType">
                 <Annotation Term="UI.LineItem">
                     <Collection>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="ServiceDocumentItem"/>
+                            <PropertyValue Property="Value" Path="ProfitCenter"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="ServiceDocument"/>
+                            <PropertyValue Property="Value" Path="ControllingArea"/>
                         </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="ServiceDocumentType"/>
-                        </Record>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="UI.SelectionFields">
-                    <Collection>
-                        <PropertyPath>ServiceDocumentItem</PropertyPath>
-                        <PropertyPath>ServiceDocument</PropertyPath>
-                        <PropertyPath>ServiceDocumentType</PropertyPath>
                     </Collection>
                 </Annotation>
             </Annotations>
             <Annotations Target="cds_zwm_serviceorder.ServiceOrderType">
-                <Annotation Term="UI.Chart" Qualifier="priority_donut">
-                    <Record Type="UI.ChartDefinitionType">
-                        <PropertyValue Property="Title" String="Number of Items"/>
-                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Donut"/>
-                        <PropertyValue Property="Dimensions">
-                            <Collection>
-                                <PropertyPath>ServiceDocumentItemStatus</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="DimensionAttributes">
-                            <Collection>
-                                <Record Type="UI.ChartDimensionAttributeType">
-                                    <PropertyValue Property="Dimension" PropertyPath="ServiceDocumentItemStatus"/>
-                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="Measures">
-                            <Collection>
-                                <PropertyPath>NmbrOfServiceOrderItems</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="MeasureAttributes">
-                            <Collection>
-                                <Record Type="UI.ChartMeasureAttributeType">
-                                    <PropertyValue Property="Measure" PropertyPath="NmbrOfServiceOrderItems"/>
-                                    <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
-                                    <PropertyValue Property="DataPoint" AnnotationPath="@UI.DataPoint#NmbrOfServiceOrderItems"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Organization"/>
+                            <PropertyValue Property="ID" String="OrganizationFacet"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Organization Data"/>
+                                        <PropertyValue Property="ID" String="Organization"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.Identification#Organization"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                    </Collection>
                 </Annotation>
                 <Annotation Term="UI.FieldGroup" Qualifier="GeneralData">
                     <Record>
@@ -191,10 +165,24 @@
                         <PropertyValue Property="Label" String="Additional Filters"/>
                     </Record>
                 </Annotation>
-                <Annotation Term="UI.LineItem">
+                <Annotation Term="UI.Identification" Qualifier="Organization">
                     <Collection>
                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Sales Organization"/>
+                            <PropertyValue Property="Value" Path="ServiceOrganization"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Service Organization"/>
+                            <PropertyValue Property="Value" Path="ResponsibleServiceOrganization"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataFieldWithIntentBasedNavigation">
                             <PropertyValue Property="Label" String="Service Document"/>
+                            <PropertyValue Property="SemanticObject" String="ServiceOrder"/>
+                            <PropertyValue Property="Action" String="displayMaintenanceOrder"/>
                             <PropertyValue Property="Value" Path="ServiceOrder"/>
                         </Record>
                         <Record Type="UI.DataField">
@@ -204,10 +192,6 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="Material"/>
                             <PropertyValue Property="Value" Path="Product"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Dervice Location"/>
-                            <PropertyValue Property="Value" Path="DeviceLocation"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="Item Description"/>
@@ -234,8 +218,91 @@
                             <PropertyValue Property="Value" Path="ContractAccount"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Partner"/>
                             <PropertyValue Property="Value" Path="SoldToParty"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Profit Center"/>
+                            <PropertyValue Property="Value" Path="ProfitCenter"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Internal Order"/>
+                            <PropertyValue Property="Value" Path="InternalOrder"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Request"/>
+                            <PropertyValue Property="Value" Path="BillingRequest"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Document"/>
+                            <PropertyValue Property="Value" Path="BillingDocument"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Net Amount"/>
+                            <PropertyValue Property="Value" Path="ServiceDocumentItemNetAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Tax Amount"/>
+                            <PropertyValue Property="Value" Path="ServiceDocumentItemTaxAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Maintenance Order"/>
+                            <PropertyValue Property="Value" Path="MaintenanceOrder"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="PM Internal Order"/>
+                            <PropertyValue Property="Value" Path="PMOrderInternalOrder"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="PM Order Profit Center"/>
+                            <PropertyValue Property="Value" Path="PMOrderProfitCenter"/>
+                        </Record>
+                        <Record Type="UI.DataFieldWithIntentBasedNavigation">
+                            <PropertyValue Property="SemanticObject" String="Service"/>
+                            <PropertyValue Property="Action" String="releaseItemsForBilling"/>
+                            <PropertyValue Property="Value" Path="ServiceDocumentItem"/>
+                        </Record>
+                        <Record Type="UI.DataFieldWithIntentBasedNavigation">
+                            <PropertyValue Property="SemanticObject" String="ZLH_ServiceOrder"/>
+                            <PropertyValue Property="Action" String="createContractAccount"/>
+                            <PropertyValue Property="Value" Path="SoldToParty"/>
+                        </Record>
+                        <Record Type="UI.DataFieldWithIntentBasedNavigation">
+                            <PropertyValue Property="SemanticObject" String="ZLH_ServiceOrder"/>
+                            <PropertyValue Property="Action" String="createBillingDocument"/>
+                            <PropertyValue Property="Value" Path="BillingRequest"/>
+                        </Record>
+                        <Record Type="UI.DataFieldWithIntentBasedNavigation">
+                            <PropertyValue Property="SemanticObject" String="ZLH_ServiceOrder"/>
+                            <PropertyValue Property="Action" String="displayBillingDocument"/>
+                            <PropertyValue Property="Value" Path="BillingRequest"/>
+                        </Record>
+                        <Record Type="UI.DataFieldWithIntentBasedNavigation">
+                            <PropertyValue Property="SemanticObject" String="">
+                                <Annotation Term="Core.Messages">
+                                    <Collection>
+                                        <Record>
+                                            <PropertyValue Property="message" String="NOT YET SUPPORTED"/>
+                                            <PropertyValue Property="severity" String="error"/>
+                                        </Record>
+                                    </Collection>
+                                </Annotation>
+                            </PropertyValue>
+                            <PropertyValue Property="Action" String="cancelBillingDocuments"/>
+                            <PropertyValue Property="Value" Path="BillingDocument"/>
+                        </Record>
+                        <Record Type="UI.DataFieldWithIntentBasedNavigation">
+                            <PropertyValue Property="SemanticObject" String="">
+                                <Annotation Term="Core.Messages">
+                                    <Collection>
+                                        <Record>
+                                            <PropertyValue Property="message" String="NOT YET SUPPORTED"/>
+                                            <PropertyValue Property="severity" String="error"/>
+                                        </Record>
+                                    </Collection>
+                                </Annotation>
+                            </PropertyValue>
+                            <PropertyValue Property="Action" String="displayBillingDocument"/>
+                            <PropertyValue Property="Value" Path="BillingDocument"/>
                         </Record>
                     </Collection>
                 </Annotation>
